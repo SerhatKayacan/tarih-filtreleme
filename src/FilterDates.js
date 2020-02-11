@@ -25,7 +25,7 @@ const getCurrentMonth = () => {
   return thisMonth;
 };
 
-export const findBetween = (dates, start, end) => {
+export const findBetween = (dates, start, end, filterProperty) => {
   let startDate = new Date(start);
   let endDate = new Date(end);
   let datesFiltered = [];
@@ -49,7 +49,7 @@ export const findBetween = (dates, start, end) => {
   dates.map(dateObject => {
     let i;
     for (i = 0; i < dateArrFormatted.length; i++) {
-      if (dateObject.date.includes(dateArrFormatted[i])) {
+      if (dateObject[filterProperty].includes(dateArrFormatted[i])) {
         datesFiltered.push(dateObject);
         break;
       }
@@ -58,22 +58,22 @@ export const findBetween = (dates, start, end) => {
   return datesFiltered;
 };
 
-export const filterDates = (dates, date) => {
+export const filterDates = (dates, chosen, filterProperty) => {
   let today = getCurrentDate();
   let yesterday = getYesterday();
   let thisMonth = getCurrentMonth();
-  switch (date) {
-    case "bugün":
+  switch (chosen) {
+    case "today":
       return dates.filter(dateObject => {
-        return dateObject.date.includes(today);
+        return dateObject[filterProperty].includes(today);
       });
-    case "dün":
+    case "yesterday":
       return dates.filter(dateObject => {
-        return dateObject.date.includes(yesterday);
+        return dateObject[filterProperty].includes(yesterday);
       });
-    case "buay":
+    case "thismonth":
       return dates.filter(dateObject => {
-        return dateObject.date.includes(thisMonth);
+        return dateObject[filterProperty].includes(thisMonth);
       });
   }
 };

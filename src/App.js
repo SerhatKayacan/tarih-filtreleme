@@ -28,14 +28,15 @@ function App() {
     { date: "2019-02-11 09:09:09" },
     { date: "2018-02-11 09:09:09" }
   ]);
+  const filterProperty = "date";
   const [filteredDates, setFilteredDates] = useState([]);
 
   const changeDate = selectedDate => {
     setselected(selectedDate);
-    setFilteredDates(filterDates(dates, selectedDate));
+    setFilteredDates(filterDates(dates, selectedDate, filterProperty));
   };
   const findBetweenFonk = (dates, start, end) => {
-    setFilteredDates(findBetween(dates, start, end));
+    setFilteredDates(findBetween(dates, start, end, filterProperty));
   };
   return (
     <div className="App">
@@ -43,8 +44,8 @@ function App() {
         bugün
         <input
           type="radio"
-          value="bugün"
-          checked={selected === "bugün"}
+          value="today"
+          checked={selected === "today"}
           onChange={e => changeDate(e.target.value)}
         ></input>
       </div>
@@ -52,8 +53,8 @@ function App() {
         dün
         <input
           type="radio"
-          value="dün"
-          checked={selected === "dün"}
+          value="yesterday"
+          checked={selected === "yesterday"}
           onChange={e => changeDate(e.target.value)}
         ></input>
       </div>
@@ -61,8 +62,8 @@ function App() {
         bu ay
         <input
           type="radio"
-          value="buay"
-          checked={selected === "buay"}
+          value="thismonth"
+          checked={selected === "thismonth"}
           onChange={e => changeDate(e.target.value)}
         ></input>
       </div>
