@@ -30,7 +30,7 @@ export const findBetween = (dates, start, end, filterProperty) => {
   let endDate = new Date(end);
   let datesFiltered = [];
   let getDateArray = function(start, end) {
-    let arr = new Array();
+    let arr = [];
     let dt = new Date(start);
     while (dt <= end) {
       arr.push(new Date(dt));
@@ -58,22 +58,24 @@ export const findBetween = (dates, start, end, filterProperty) => {
   return datesFiltered;
 };
 
-export const filterDates = (dates, chosen, filterProperty) => {
+export const filterDates = (state, chosen, filterProperty) => {
   let today = getCurrentDate();
   let yesterday = getYesterday();
   let thisMonth = getCurrentMonth();
   switch (chosen) {
     case "today":
-      return dates.filter(dateObject => {
+      return state.filter(dateObject => {
         return dateObject[filterProperty].includes(today);
       });
     case "yesterday":
-      return dates.filter(dateObject => {
+      return state.filter(dateObject => {
         return dateObject[filterProperty].includes(yesterday);
       });
     case "thismonth":
-      return dates.filter(dateObject => {
+      return state.filter(dateObject => {
         return dateObject[filterProperty].includes(thisMonth);
       });
+    default:
+      return state;
   }
 };
