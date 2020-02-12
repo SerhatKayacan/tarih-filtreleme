@@ -79,3 +79,9 @@ export const filterDates = (state, chosen, filterProperty) => {
       return state;
   }
 };
+
+export const filterByName = (state, name, filterPropertyName) => {
+  return state.filter(object => {
+    return object[filterPropertyName].includes(name);
+  });
+};

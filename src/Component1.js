@@ -1,20 +1,23 @@
 import React, { useState } from "react";
-import { filterDates, findBetween } from "./FilterDates";
+import { filterDates, findBetween } from "./FilterFunctions";
 import SearchComponent from "./SearchComponent";
+import SearchName from "./SearchName";
 
 function Component1() {
   const [selected, setselected] = useState("");
   const [start, setStart] = useState("2020-01-01");
   const [end, setEnd] = useState("2020-02-11");
   const [state, setState] = useState([
-    { date: "2020-02-11 09:09:09" },
-    { date: "2020-02-10 09:09:09" },
-    { date: "2020-02-09 09:09:09" },
-    { date: "2020-01-11 09:09:09" },
-    { date: "2019-02-11 09:09:09" },
-    { date: "2018-02-11 09:09:09" }
+    { date: "2020-02-11 09:09:09", name: "ali" },
+    { date: "2020-02-10 09:09:09", name: "mehmet" },
+    { date: "2020-02-09 09:09:09", name: "yusuf" },
+    { date: "2020-01-11 09:09:09", name: "ahmet" },
+    { date: "2019-02-11 09:09:09", name: "ali" },
+    { date: "2018-02-11 09:09:09", name: "mehmet" }
   ]);
   const filterProperty = "date";
+  const filterPropertyName = "name";
+
   const [filteredState, setFilteredState] = useState([]);
 
   const changeDate = selectedDate => {
@@ -36,9 +39,19 @@ function Component1() {
         changeDate={changeDate}
         findBetweenFonk={findBetweenFonk}
       />
+      <SearchName
+        state={state}
+        setselected={setselected}
+        setFilteredState={setFilteredState}
+        filterPropertyName={filterPropertyName}
+      />
       <ul>
-        {filteredState.map(dateObject => {
-          return <li>{dateObject.date}</li>;
+        {filteredState.map(state => {
+          return (
+            <li>
+              {state.date} {state.name}
+            </li>
+          );
         })}
       </ul>
     </div>

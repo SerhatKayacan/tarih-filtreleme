@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { filterDates, findBetween } from "./FilterDates";
+import { filterDates, findBetween } from "./FilterFunctions";
 import SearchComponent from "./SearchComponent";
 
 function Component1() {
